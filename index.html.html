@@ -1,0 +1,318 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary)}
+.logo{font-size:14px;font-weight:500;letter-spacing:.06em}
+.nav-links{display:flex;gap:18px}
+.nav-links a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;cursor:pointer}
+.hero{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:40px 28px 36px;border-bottom:0.5px solid var(--color-border-tertiary);align-items:center}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.avatar-ring{width:110px;height:110px;border-radius:50%;border:2px solid #AFA9EC;display:flex;align-items:center;justify-content:center}
+.avatar-inner{width:96px;height:96px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:500;color:#3C3489}
+.available{font-size:11px;background:#EAF3DE;color:#27500A;padding:3px 10px;border-radius:20px;letter-spacing:.04em}
+.hero-right h1{font-size:26px;font-weight:500;margin-bottom:4px}
+.hero-right .title{font-size:13px;color:#534AB7;font-weight:500;margin-bottom:8px;letter-spacing:.03em}
+.hero-right .bio{font-size:13px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:16px;max-width:420px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.chip{font-size:11px;padding:3px 9px;border-radius:20px;border:0.5px solid #AFA9EC;color:#534AB7;background:#EEEDFE}
+.hero-ctas{display:flex;gap:10px}
+.btn-primary{font-size:12px;padding:7px 16px;border-radius:var(--border-radius-md);background:#7F77DD;color:#EEEDFE;border:none;cursor:pointer}
+.btn-secondary{font-size:12px;padding:7px 16px;border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);border:0.5px solid var(--color-border-secondary);cursor:pointer}
+.section{padding:36px 28px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.section-title{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-secondary)}
+.pill-count{font-size:11px;background:var(--color-background-secondary);color:var(--color-text-tertiary);padding:2px 8px;border-radius:20px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;text-align:center}
+.stat .num{font-size:24px;font-weight:500;color:#7F77DD}
+.stat .lbl{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--color-border-secondary)}
+.titem{position:relative;margin-bottom:28px}
+.titem::before{content:'';position:absolute;left:-21px;top:6px;width:8px;height:8px;border-radius:50%;background:#7F77DD}
+.titem.active::before{background:#1D9E75;box-shadow:0 0 0 3px #E1F5EE}
+.titem-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.titem-head h3{font-size:14px;font-weight:500}
+.titem-head .period{font-size:11px;color:var(--color-text-tertiary);background:var(--color-background-secondary);padding:2px 8px;border-radius:20px}
+.titem .co{font-size:12px;color:#534AB7;margin-bottom:8px;font-weight:500}
+.titem ul{list-style:none;padding:0}
+.titem ul li{font-size:12px;color:var(--color-text-secondary);padding:2px 0 2px 12px;position:relative;line-height:1.6}
+.titem ul li::before{content:'→';position:absolute;left:0;color:#AFA9EC;font-size:10px;top:3px}
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.skill-bars{display:flex;flex-direction:column;gap:12px}
+.skill-bar-item{display:flex;align-items:center;gap:10px}
+.skill-bar-label{font-size:12px;color:var(--color-text-secondary);width:130px;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--color-background-secondary);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:#7F77DD}
+.bar-fill.teal{background:#1D9E75}
+.bar-fill.coral{background:#D85A30}
+.skill-pct{font-size:11px;color:var(--color-text-tertiary);width:30px;text-align:right}
+.chart-wrap{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:16px}
+.chart-title{font-size:11px;color:var(--color-text-secondary);margin-bottom:12px;letter-spacing:.05em;text-transform:uppercase}
+.radar-labels{font-size:10px;fill:var(--color-text-secondary)}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.tech-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;border-left:3px solid transparent}
+.tech-card.purple{border-left-color:#7F77DD}
+.tech-card.teal{border-left-color:#1D9E75}
+.tech-card.coral{border-left-color:#D85A30}
+.tech-card.amber{border-left-color:#BA7517}
+.tech-card .tc-label{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.tech-card .tc-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.edu-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.edu-card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.edu-icon{width:36px;height:36px;border-radius:var(--border-radius-md);background:#EEEDFE;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.edu-card h4{font-size:13px;font-weight:500;margin-bottom:3px}
+.edu-card p{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+.contact-strip{padding:24px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.contact-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)}
+.contact-item a{color:var(--color-text-info);text-decoration:none}
+.flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin-top:20px}
+.flow-box{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 12px;font-size:12px;font-weight:500;color:var(--color-text-primary);white-space:nowrap}
+.flow-box.purple{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.flow-box.teal{background:#E1F5EE;color:#085041;border-color:#5DCAA5}
+.flow-box.coral{background:#FAECE7;color:#712B13;border-color:#F0997B}
+.flow-arrow{font-size:14px;color:var(--color-text-tertiary);padding:0 6px}
+</style>
+
+<h2 class="sr-only">Interactive portfolio for Umesh K, MarTech and Personalization Lead</h2>
+
+<nav class="nav">
+  <span class="logo">UMESH K</span>
+  <div class="nav-links">
+    <a>Experience</a><a>Skills</a><a>Tech stack</a><a>Education</a><a>Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="avatar-wrap">
+    <div class="avatar-ring">
+      <div class="avatar-inner">UK</div>
+    </div>
+    <span class="available">Available</span>
+  </div>
+  <div class="hero-right">
+    <h1>Umesh K</h1>
+    <div class="title">MarTech & Personalization Lead</div>
+    <p class="bio">6+ years building data-driven customer experiences at scale — connecting Adobe Experience Cloud, real-time CDP, and experimentation to drive measurable business impact.</p>
+    <div class="chips">
+      <span class="chip">Adobe AEP</span>
+      <span class="chip">Real-Time CDP</span>
+      <span class="chip">Adobe Target</span>
+      <span class="chip">A/B Testing</span>
+      <span class="chip">CJA</span>
+      <span class="chip">React.js</span>
+      <span class="chip">XDM / Web SDK</span>
+    </div>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="openLink('mailto:umesh.uk0321@gmail.com')">Get in touch</button>
+      <button class="btn-secondary" onclick="openLink('https://www.linkedin.com/in/umeshk03')">LinkedIn ↗</button>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Impact at a glance</span></div>
+  <div class="stats-row">
+    <div class="stat"><div class="num">6+</div><div class="lbl">Years in MarTech</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Enterprise orgs</div></div>
+    <div class="stat"><div class="num">10+</div><div class="lbl">Adobe solutions</div></div>
+    <div class="stat"><div class="num">∞</div><div class="lbl">Experiments run</div></div>
+  </div>
+
+  <div class="section-header" style="margin-bottom:12px"><span class="section-title">Data pipeline architecture</span></div>
+  <div class="flow-row">
+    <div class="flow-box purple">Customer data sources</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box purple">AEP Web SDK / XDM</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box purple">Real-Time CDP</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box teal">Audience segments</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box teal">Adobe Target</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box coral">Personalized experience</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box coral">CJA / Analytics insights</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Career timeline</span><span class="pill-count">3 roles</span></div>
+  <div class="timeline">
+    <div class="titem active">
+      <div class="titem-head">
+        <h3>Adobe Multi-Solution Developer</h3>
+        <span class="period">Dec 2022 – Present · 3y 5m</span>
+      </div>
+      <div class="co">Verizon · Alpharetta, GA</div>
+      <ul>
+        <li>Led AEP Real-Time CDP implementation — schemas, identity namespaces, data pipelines</li>
+        <li>Activated AEP audiences into Adobe Target for real-time A/B personalization</li>
+        <li>Built React.js components for dynamic personalized content delivery</li>
+        <li>Migrated Adobe Launch → AEP Web SDK with full XDM standardization</li>
+        <li>Designed CJA Data Views for cross-channel journey reporting</li>
+      </ul>
+    </div>
+    <div class="titem">
+      <div class="titem-head">
+        <h3>Sr AEM & Target Developer</h3>
+        <span class="period">Jul 2021 – Dec 2022 · 1y 6m</span>
+      </div>
+      <div class="co">MetLife · Charlotte, NC</div>
+      <ul>
+        <li>Set up AEP Real-Time CDP from scratch — unified real profiles for personalization</li>
+        <li>Cleaned and standardized event tracking via XDM + Web SDK migration</li>
+        <li>Ran iterative A/B tests; failed fast, improved faster</li>
+        <li>Built CJA + Adobe Analytics Data Views that turned numbers into real decisions</li>
+      </ul>
+    </div>
+    <div class="titem">
+      <div class="titem-head">
+        <h3>Adobe Developer – AEM & Analytics</h3>
+        <span class="period">Dec 2019 – Jul 2021 · 1y 8m</span>
+      </div>
+      <div class="co">HCL Technologies · Hyderabad</div>
+      <ul>
+        <li>Advanced reporting, funnel analysis and automated dashboards for web & paid campaigns</li>
+        <li>End-to-end analytics implementation: Adobe Analytics + GA + Adobe Target via Launch</li>
+        <li>Trained stakeholders on self-service analytics and BI dashboards</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Skill proficiency</span></div>
+  <div class="skills-wrap">
+    <div class="skill-bars">
+      <div class="skill-bar-item"><span class="skill-bar-label">Adobe AEP / CDP</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="skill-pct">96%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">Adobe Target</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><span class="skill-pct">94%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">Adobe Analytics</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span class="skill-pct">92%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">Customer Journey Analytics</span><div class="bar-track"><div class="bar-fill teal" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">AEP Web SDK / XDM</span><div class="bar-track"><div class="bar-fill teal" style="width:90%"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">React.js / Angular</span><div class="bar-track"><div class="bar-fill coral" style="width:82%"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">A/B Testing strategy</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="skill-pct">93%</span></div>
+      <div class="skill-bar-item"><span class="skill-bar-label">Generative AI for web</span><div class="bar-track"><div class="bar-fill coral" style="width:75%"></div></div><span class="skill-pct">75%</span></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Expertise radar</div>
+      <div style="position:relative;width:100%;height:220px"><canvas id="radar" role="img" aria-label="Radar chart showing skill levels across six domains">Skill radar chart for Umesh K.</canvas></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Tech stack</span></div>
+  <div class="tech-grid">
+    <div class="tech-card purple"><div class="tc-label">CDP</div><div class="tc-name">Adobe AEP</div></div>
+    <div class="tech-card purple"><div class="tc-label">Personalization</div><div class="tc-name">Adobe Target</div></div>
+    <div class="tech-card purple"><div class="tc-label">Content mgmt</div><div class="tc-name">Adobe AEM</div></div>
+    <div class="tech-card teal"><div class="tc-label">Analytics</div><div class="tc-name">Adobe Analytics</div></div>
+    <div class="tech-card teal"><div class="tc-label">Journey analytics</div><div class="tc-name">Adobe CJA</div></div>
+    <div class="tech-card teal"><div class="tc-label">Audience mgmt</div><div class="tc-name">Adobe AAM</div></div>
+    <div class="tech-card coral"><div class="tc-label">Frontend</div><div class="tc-name">React.js</div></div>
+    <div class="tech-card coral"><div class="tc-label">Frontend</div><div class="tc-name">Angular</div></div>
+    <div class="tech-card amber"><div class="tc-label">Tag mgmt</div><div class="tc-name">Adobe Launch</div></div>
+    <div class="tech-card amber"><div class="tc-label">Tracking</div><div class="tc-name">AEP Web SDK</div></div>
+    <div class="tech-card amber"><div class="tc-label">Data schema</div><div class="tc-name">XDM</div></div>
+    <div class="tech-card amber"><div class="tc-label">Analytics</div><div class="tc-name">Google Analytics</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Years of experience by domain</span></div>
+  <div style="position:relative;width:100%;height:200px"><canvas id="barChart" role="img" aria-label="Horizontal bar chart showing years of experience by domain">Domain experience: AEP/CDP 3.5yr, Target/Personalization 6yr, Analytics 6yr, AEM 3yr, Frontend 4yr.</canvas></div>
+</div>
+
+<div class="section">
+  <div class="section-header"><span class="section-title">Education</span></div>
+  <div class="edu-cards">
+    <div class="edu-card">
+      <div class="edu-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7F77DD" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <h4>Master's in Computer Science</h4>
+        <p>University of Central Missouri<br>USA</p>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <h4>B.Tech in Computer Science</h4>
+        <p>Vignan's Lara Institute of Technology<br>2015 – 2019 · Hyderabad</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-strip">
+  <div class="contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg><a href="mailto:umesh.uk0321@gmail.com">umesh.uk0321@gmail.com</a></div>
+  <div class="contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg><a href="https://www.linkedin.com/in/umeshk03">linkedin.com/in/umeshk03</a></div>
+  <div class="contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Acworth, Georgia</span></div>
+  <div style="font-size:11px;color:var(--color-text-tertiary)">© 2026 Umesh K</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const textColor = isDark ? '#B4B2A9' : '#888780';
+const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+
+new Chart(document.getElementById('radar'), {
+  type: 'radar',
+  data: {
+    labels: ['CDP & Data', 'Personalization', 'Analytics', 'Experimentation', 'Frontend dev', 'Generative AI'],
+    datasets: [{
+      data: [96, 94, 92, 93, 82, 75],
+      backgroundColor: 'rgba(127,119,221,0.15)',
+      borderColor: '#7F77DD',
+      borderWidth: 1.5,
+      pointBackgroundColor: '#7F77DD',
+      pointRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        min: 0, max: 100,
+        ticks: { display: false, stepSize: 25 },
+        grid: { color: gridColor },
+        angleLines: { color: gridColor },
+        pointLabels: { font: { size: 11 }, color: textColor }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: ['A/B Testing & personalization', 'Adobe Analytics', 'AEP / CDP', 'React.js & frontend', 'Adobe AEM', 'Google Analytics'],
+    datasets: [{
+      label: 'Years',
+      data: [6, 6, 3.5, 4, 3, 2],
+      backgroundColor: ['#7F77DD','#7F77DD','#1D9E75','#D85A30','#1D9E75','#D85A30'],
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.parsed.x + ' yrs' } } },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 }, callback: v => v + 'yr' }, max: 7 },
+      y: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } }
+    }
+  }
+});
+</script>
